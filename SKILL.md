@@ -19,7 +19,7 @@ curl -o ~/.claude/skills/tianqi-data/SKILL.md \
 所有接口均为 HTTP GET，用 curl 直接调用：
 
 ```bash
-BASE="https://api.tianqi-data.com/blade-dataplatform/open/data"
+BASE="http://192.168.1.52:9001/blade-dataplatform/open/data"
 
 # 查单只股票行情
 curl -s "$BASE/quote?symbol=000001"
@@ -173,12 +173,27 @@ curl -s "$BASE/macro/latest?type=PMI"
 
 ---
 
+### 12. 公司公告 `announcements`
+
+按股票查最近公告（标题、AI 摘要、Markdown 完整正文、公告日期、类型、链接），最多 5 条。
+
+```bash
+curl -s "$BASE/announcements?symbol=000001&limit=5"
+# 返回: title, summary, content, ann_date, publish_time, category,
+#       importance, sentiment, keywords, source, url
+# 说明: content 为 Markdown 格式公告全文，单条可能较长，故上限 5 条
+```
+
+**示例问题**：「平安银行最近发布了哪些公告？」「茅台最新公告的具体内容是什么？」
+
+---
+
 ## 综合分析示例
 
 问「帮我分析一下 688017 的估值」时，依次调用：
 
 ```bash
-BASE="https://api.tianqi-data.com/blade-dataplatform/open/data"
+BASE="http://192.168.1.52:9001/blade-dataplatform/open/data"
 curl -s "$BASE/stock?symbol=688017"       # PE/PB/市值
 curl -s "$BASE/quote?symbol=688017"       # 当前股价
 curl -s "$BASE/financial?symbol=688017"   # ROE/净利润
