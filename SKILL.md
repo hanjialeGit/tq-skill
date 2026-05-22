@@ -19,7 +19,7 @@ curl -o ~/.claude/skills/tianqi-data/SKILL.md \
 所有接口均为 HTTP GET，用 curl 直接调用：
 
 ```bash
-BASE="https://api.tianqi-data.com/blade-dataplatform/open/data"
+BASE="http://192.168.1.52:9001/blade-dataplatform/open/data"
 
 # 查单只股票行情
 curl -s "$BASE/quote?symbol=000001"
@@ -659,7 +659,7 @@ curl -s "$BASE/cyq-perf?symbol=000001&limit=5"
 问「帮我分析一下 688017 的估值」时，依次调用：
 
 ```bash
-BASE="https://api.tianqi-data.com/blade-dataplatform/open/data"
+BASE="http://192.168.1.52:9001/blade-dataplatform/open/data"
 curl -s "$BASE/stock?symbol=688017"       # PE/PB/市值
 curl -s "$BASE/quote?symbol=688017"       # 当前股价
 curl -s "$BASE/financial?symbol=688017"   # ROE/净利润
